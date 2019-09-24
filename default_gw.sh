@@ -18,7 +18,7 @@ change_gw () {
     ip_range=$(echo $eth_ip | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.')
     gw_ip=$(echo $ip_range'1')
 
-    # Checks if there is a correct static path for the interface. If it doesn't exist, configure the address stored in the variable gw_ip
+    # Checks if there is a correct static route as default gateway for the interface. If it doesn't exist, configure the address stored in the variable gw_ip
     fail=$(route -n | grep -q $gw_ip; echo $?)
     if [ "$fail" -ne 0 ]; then
     	route add default gw $gw_ip wlan0
